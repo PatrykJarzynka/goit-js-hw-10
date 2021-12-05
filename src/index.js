@@ -9,14 +9,30 @@ const list = document.querySelector('.country-list');
 const info = document.querySelector('.country-info');
 
 const placeResponse = elements => {
-  const markup = elements
-    .map(element => {
-      return `<li>
-                <p> ${element.name.official} </p>
+    if (elements.length === 1) {
+        const markup = elements
+            .map(element => {
+                return `<li>
+                <p><img class="svg__img" src="${element.flags.svg}" alt="Flaga panstwa"> ${element.name.common} </p>
+                <p> <b>Capital:</b> ${element.capital} </p>
+                <p> <b>Population:</b>${element.population} </p>
+                <p> <b>Languages:</b>${element.languages} </p> 
             </li>`;
-    })
-    .join(' ');
-  list.innerHTML = markup;
+            })
+            .join('');
+        info.innerHTML = markup;
+        list.innerHTML = "";
+    }
+    else if (elements.length >= 2 && elements.length <= 10) {
+        const markup = elements
+          .map(element => {
+            return `<li>
+                <p> ${element.name.common} </p>
+            </li>`;
+          })
+          .join(' ');
+        list.innerHTML = markup;
+    }
 };
 
 input.addEventListener(
