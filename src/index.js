@@ -9,39 +9,39 @@ const list = document.querySelector('.country-list');
 const info = document.querySelector('.country-info');
 
 const placeResponse = elements => {
-    if (elements.length === 1) {
-        const markup = elements
-            .map(element => {
-                return `<li>
-                <p><img class="svg__img" src="${element.flags.svg}" alt="Flaga panstwa"> ${element.name.common} </p>
+  if (elements.length === 1) {
+    const markup = elements
+      .map(element => {
+        return `<li>
+                <p><img class="svg__img" src="${element.flags.svg}" alt="Flaga panstwa"> ${
+          element.name.common
+        } </p>
                 <p> <b>Capital:</b> ${element.capital} </p>
                 <p> <b>Population:</b>${element.population} </p>
-                <p> <b>Languages:</b>${element.languages} </p> 
+                <p> <b>Languages:</b>${Object.values(element.languages)} </p>
             </li>`;
-            })
-            .join('');
-        info.innerHTML = markup;
-        list.innerHTML = "";
-    }
-    else if (elements.length >= 2 && elements.length <= 10) {
-        const markup = elements
-          .map(element => {
-            return `<li>
+      })
+      .join('');
+    info.innerHTML = markup;
+    list.innerHTML = '';
+  } else if (elements.length >= 2 && elements.length <= 10) {
+    const markup = elements
+      .map(element => {
+        return `<li>
                 <p> ${element.name.common} </p>
             </li>`;
-          })
-          .join(' ');
-        list.innerHTML = markup;
-    }
+      })
+      .join(' ');
+    list.innerHTML = markup;
+    info.innerHTML = '';
+  }
 };
 
 input.addEventListener(
   'input',
   debounce(() => {
-      let names = input.value;
-      
-      fetchCountries(names)
-          .then(elements => placeResponse(elements));
-      
+    let names = input.value;
+
+    fetchCountries(names).then(elements => placeResponse(elements));
   }, DEBOUNCE_DELAY),
 );

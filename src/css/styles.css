@@ -27,5 +27,8 @@ body {
 p:first-child{
   font-size: 30px;
   font-weight: 700;
+}
 
+li{
+  list-style: none;
 }

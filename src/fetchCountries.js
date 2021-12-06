@@ -6,6 +6,7 @@ const fetchCountries = name => {
             if (!resolve.ok) throw new Error(resolve.status);
             return resolve.json();
         })
+        .catch(error => console.log(error));
 }
 
 export { fetchCountries };
