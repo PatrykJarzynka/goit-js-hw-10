@@ -1,6 +1,7 @@
 import './css/styles.css';
 import { fetchCountries } from './fetchCountries';
 var debounce = require('lodash.debounce');
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -35,10 +36,11 @@ const placeResponse = elements => {
     list.innerHTML = markup;
     info.innerHTML = '';
   }
+  else if (elements.length > 10) Notify.info('Too many matches found. Please enter a more specific name.');
 };
 
-const checkInput = () => {
-  if (input.value === '') {
+const checkInput = input => {
+  if (input.trim() === '') {
     info.innerHTML = '';
     list.innerHTML = '';
     return true;
@@ -46,11 +48,12 @@ const checkInput = () => {
   return false;
 }
 
+
 input.addEventListener(
   'input',
   debounce(() => {
-    let names = input.value;
-    if(checkInput()) return;
+    let names = input.value.trim();
+    if(checkInput(names)) return;
     fetchCountries(names).then(elements => placeResponse(elements));
   }, DEBOUNCE_DELAY),
 );
