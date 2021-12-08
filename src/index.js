@@ -15,9 +15,9 @@ const placeResponse = elements => {
       .map(element => {
         return `<li>
                 <p class="text"><img class="svg__img" src="${element.flags.svg}" alt="Flaga panstwa"> ${ element.name.common} </p>
-                <p> <b>Capital:</b> ${element.capital} </p>
-                <p> <b>Population:</b>${element.population} </p>
-                <p> <b>Languages:</b>${Object.values(element.languages)} </p>
+                <p> <b>Capital: </b> ${element.capital} </p>
+                <p> <b>Population: </b>${element.population} </p>
+                <p> <b>Languages: </b>${Object.values(element.languages)} </p>
             </li>`;
         })
       .join('');
@@ -37,11 +37,20 @@ const placeResponse = elements => {
   }
 };
 
+const checkInput = () => {
+  if (input.value === '') {
+    info.innerHTML = '';
+    list.innerHTML = '';
+    return true;
+  }
+  return false;
+}
+
 input.addEventListener(
   'input',
   debounce(() => {
     let names = input.value;
-
+    if(checkInput()) return;
     fetchCountries(names).then(elements => placeResponse(elements));
   }, DEBOUNCE_DELAY),
 );
