@@ -12,6 +12,16 @@ body {
   line-height: 1.5;
 }
 
+ul{
+  padding: 0;
+  margin: 0;
+}
+
+li{
+  list-style: none;
+}
+
+
 #search-box {
   font: inherit;
   padding: 8px;
@@ -24,11 +34,26 @@ body {
   height: 25px;
 }
 
-p:first-child{
+.svg__img-small{
+  width: 20px;
+  height: 15px;
+}
+
+
+.text{
   font-size: 30px;
   font-weight: 700;
 }
 
-li{
-  list-style: none;
+.textSmall{
+  font-size: 20px;
+  font-weight: 500;
 }
+
+.library p{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+
