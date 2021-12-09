@@ -1,4 +1,5 @@
 import { Notify } from "notiflix";
+const httpStatus = { NOT_FOUND: '404' };
 
 const fetchCountries = name => {
     return fetch(
@@ -9,7 +10,7 @@ const fetchCountries = name => {
             return resolve.json();
         })
         .catch(error => {
-            if (error == "Error: 404") {
+            if (error.message === httpStatus.NOT_FOUND) {
                 Notify.failure('Oops, there is no country with that name');
             } 
         });
